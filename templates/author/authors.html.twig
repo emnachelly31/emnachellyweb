@@ -1,0 +1,35 @@
+{# <form method="get">
+    <label for="minNbrBook">Minimum Nbr of Books:</label>
+    <input type="number" name="minNbrBook" id="minNbrBook">
+    <br>
+    <label for="maxNbrBook">Maximum Nbr of Books:</label>
+    <input type="number" name="maxNbrBook" id="maxNbrBook">
+    <br>
+    <input type="submit" value="Search">
+</form>
+#}
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Username</td>
+        <td>Email</td>
+        <td>Nbr of Books</td>
+    </tr>
+    {% set sortedAuthors = author | sort((a,b) => a.email <=> b.email) %}
+    {% for author in author %}
+        <tr>
+            <td>{{author.id}}</td>
+            <td>{{author.username}}</td>
+            <td>{{author.email}}</td>
+            <td>{{author.nbrBook}}</td>
+        </tr>
+        
+    {% endfor %}
+    
+</table>
+
+<form method="post" action="{{ path('delete') }}">
+    <button type="submit">Delete</button>
+</form>
+                <a href="{{ path('add') }}">Create New</a>
+

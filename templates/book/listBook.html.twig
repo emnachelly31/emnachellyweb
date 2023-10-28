@@ -1,0 +1,67 @@
+<h1 align="center">List books</h1>
+{{ form(searchForm) }}
+{% if  books is empty %}
+    <h1>No Books found</h1>
+{% else %}
+    {% set publishedCount=0 %}
+    {% set notPublishedCount=0 %}
+    {% set ncategory=0 %}
+    <table align="center" border="1">
+        <tr>
+            <td>Ref</td>
+            <td>Title</td>
+            <th>Publication date</th>
+            <th>Published</th>
+            <th>Category</th>
+            <th>Author</th>
+            <th>nbr of books</th>
+{#
+            <th>Actions</th>
+#}
+        </tr>
+        {% for book in books %}
+              
+              {# {% if book.author.nbrBook > 35 %} 
+                              
+                 {% if book.published %}
+                {% set publishedCount = publishedCount + 1 %}
+            {% else %}
+                {% set notPublishedCount = notPublishedCount + 1 %}
+            {% endif %}
+
+
+            {% if book.category == 'Science Fiction' %}
+                {% set ncategory = ncategory + 1 %}
+            {% endif %}
+            #}
+
+
+            {# {% if book.publicationDate > '2018-12-31' and book.publicationDate < '2024-01-01' %} #}
+
+           
+            <tr>
+                <td>{{ book.ref }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.publicationDate | date }}</td>
+                <td>{{ book.published }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.author.username }}</td>
+                <td>{{ book.author.nbrBook }}</td>
+           {# {% endif %}  #}
+                <td>
+                    <a href="{{ path('update_book', { ref: book.ref }) }}">edit</a>
+                    
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    
+{% endif %}
+{#
+<a align="center" href=" {{path('add_book')}}">Add Book</a>
+<h5>publishedCount = {{ publishedCount }}</h5>
+<h5>notPublishedCount = {{ notPublishedCount }}</h5>
+<h5>nmbr of books with category Science Fiction = {{ ncategory }}</h5>
+
+#}
